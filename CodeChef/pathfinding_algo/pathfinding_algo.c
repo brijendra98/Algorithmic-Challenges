@@ -72,12 +72,10 @@ bool CheckSnake(char **DDarr, int n, struct posn start, int hash, int acc) {
   DDarr[start.x][start.y] = '@';
   if(len == 0 && acc != hash) {
     free(neigh);
-    printf("false\n\n");
     return false;
   }
   else if (len == 0 && acc == hash) {
     free(neigh);
-    printf("true\n\n");
     return true;
   }
   for(int i = 0; i<len; i++) {
@@ -97,7 +95,6 @@ bool CheckSnake(char **DDarr, int n, struct posn start, int hash, int acc) {
       }
       free(DDarrTemp);
       free(neigh);
-      printf("true\n\n");
       return true;
     }
     for(int j=0; j<n; j++) {
@@ -106,7 +103,6 @@ bool CheckSnake(char **DDarr, int n, struct posn start, int hash, int acc) {
     free(DDarrTemp);
   }
   free(neigh);
-  printf("false\n\n");
   return false;
 }
 
@@ -118,8 +114,7 @@ int main(void) {
   for(int i = 0; i<T; i++) {
     int hash = 0;
     int n;
-    bool StartFound = false;
-    struct posn start;
+    bool flag = false;
     scanf("%d",&n);
     char **DDarr = malloc(sizeof(char *) * n);
     for(int j=0; j<n; j++) {
@@ -130,20 +125,59 @@ int main(void) {
         scanf(" %c", &(DDarr[k][j]));
         if(DDarr[k][j] == '#') {
           hash++;
-          if(!StartFound) {
-            start.x = k;
-            start.y = j;
-            StartFound = true;
-          }
         }
       }
     }
-    bool result = CheckSnake(DDarr, n, start, hash, 1);
-    if(result) {
-      printf("yes\n\n\n\n");
+    for(int k=0; k<n; k++) {
+      if(flag) { break;}
+      if(DDarr[k][0] == '#') {
+        struct posn start;
+        start.x = k;
+        start.y = 0;
+        char **DDarrTempmain = malloc(sizeof(char *) * n);
+        for(int j=0; j<n; j++) {
+          DDarrTempmain[j] = malloc(sizeof(char) * 2);
+        }
+        for(int y = 0; y<n; y++) {
+          for(int z = 0; z<2; z++) {
+            DDarrTempmain[y][z] = DDarr[y][z];
+          }
+        }
+        if(CheckSnake(DDarrTempmain, n, start, hash, 1)) {
+          flag=true;
+        }
+        for(int j=0; j<n; j++) {
+          free(DDarrTempmain[j]);
+        }
+        free(DDarrTempmain);
+      }
+      if(DDarr[k][1] == '#') {
+        struct posn start;
+        start.x = k;
+        start.y = 1;
+        char **DDarrTempmain = malloc(sizeof(char *) * n);
+        for(int j=0; j<n; j++) {
+          DDarrTempmain[j] = malloc(sizeof(char) * 2);
+        }
+        for(int y = 0; y<n; y++) {
+          for(int z = 0; z<2; z++) {
+            DDarrTempmain[y][z] = DDarr[y][z];
+          }
+        }
+        if(CheckSnake(DDarrTempmain, n, start, hash, 1)) {
+          flag=true;
+        }
+        for(int j=0; j<n; j++) {
+          free(DDarrTempmain[j]);
+        }
+        free(DDarrTempmain);
+      }
+    }
+    if(flag) {
+      printf("yes\n");
     }
     else {
-      printf("no\n\n\n\n");
+      printf("no\n");
     }
     for(int j=0; j<n; j++) {
       free(DDarr[j]);
