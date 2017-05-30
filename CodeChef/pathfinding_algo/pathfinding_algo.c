@@ -7,6 +7,13 @@ struct posn {
   int y;
 };
 
+void freeDDArr(char **DDArr, int n) {
+  for(int i=0; i<n; i++) {
+    free(DDArr[i]);
+  }
+  free(DDArr);
+}
+
 bool valid_hash_point(struct posn a, int l, char **DDArr) {
   if( a.x<l && a.x>=0 && (a.y == 0 || a.y == 1)) {
     if(DDArr[a.x][a.y] == '#') {
@@ -90,17 +97,11 @@ bool CheckSnake(char **DDarr, int n, struct posn start, int hash, int acc) {
       }
     }
     if(CheckSnake(DDarrTemp, n, NewStart, hash, acc+1)) {
-      for(int j=0; j<n; j++) {
-        free(DDarrTemp[j]);
-      }
-      free(DDarrTemp);
+      freeDDArr(DDarrTemp,n);
       free(neigh);
       return true;
     }
-    for(int j=0; j<n; j++) {
-      free(DDarrTemp[j]);
-    }
-    free(DDarrTemp);
+    freeDDArr(DDarrTemp,n);
   }
   free(neigh);
   return false;
@@ -145,11 +146,10 @@ int main(void) {
         }
         if(CheckSnake(DDarrTempmain, n, start, hash, 1)) {
           flag=true;
+          freeDDArr(DDarrTempmain, n);
+          break;
         }
-        for(int j=0; j<n; j++) {
-          free(DDarrTempmain[j]);
-        }
-        free(DDarrTempmain);
+        freeDDArr(DDarrTempmain, n);
       }
       if(DDarr[k][1] == '#') {
         struct posn start;
@@ -166,22 +166,18 @@ int main(void) {
         }
         if(CheckSnake(DDarrTempmain, n, start, hash, 1)) {
           flag=true;
+          freeDDArr(DDarrTempmain, n);
+          break;
         }
-        for(int j=0; j<n; j++) {
-          free(DDarrTempmain[j]);
-        }
-        free(DDarrTempmain);
+        freeDDArr(DDarrTempmain, n);
       }
     }
     if(flag) {
-      printf("yes\n");
+      printf("yes\n\n\n");
     }
     else {
-      printf("no\n");
+      printf("no\n\n\n");
     }
-    for(int j=0; j<n; j++) {
-      free(DDarr[j]);
-    }
-    free(DDarr);
+    freeDDArr(DDarr, n);
   }
 }
