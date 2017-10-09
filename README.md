@@ -15,6 +15,7 @@ cd Algorithms-and-Data-Structures
 
 - C Compiler (`gcc`)
 - Java Compiler (`JDK`)
+- C++ Compiler (`g++`)
 
 ## Installing
 
@@ -40,12 +41,18 @@ gcc filename.c
 chmod +x a.out
 ./a.out
 ```
+- For C++, run following commands:-
+```
+g++ filename.cpp
+chmod +x a.out
+./a.out
+```
 
 ## Built With
 
-- Java 8 - Around 69% of the solutions are written in Java.
-- C - Around 28% of solutions are written in C.
-- C++ - Around 3% of solutions are written in C++.
+- Java 8 - Around 64% of the solutions are written in Java.
+- C - Around 26% of solutions are written in C.
+- C++ - Around 10% of solutions are written in C++.
 
 ## Authors
 
