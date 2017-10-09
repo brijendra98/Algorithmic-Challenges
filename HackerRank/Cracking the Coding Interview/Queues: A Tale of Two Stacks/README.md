@@ -46,7 +46,7 @@ For each query of type *3*, print the value of the element at the front of the q
 
 ## Sample Output
 
-``
+```
 14
 14
 ```
