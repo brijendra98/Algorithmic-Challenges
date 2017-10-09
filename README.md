@@ -43,8 +43,9 @@ chmod +x a.out
 
 ## Built With
 
-- Java 8 - Around 70% of the solutions are written in Java.
-- C - Around 30% of solutions are written in C.
+- Java 8 - Around 69% of the solutions are written in Java.
+- C - Around 28% of solutions are written in C.
+- C++ - Around 3% of solutions are written in C++.
 
 ## Authors
 
